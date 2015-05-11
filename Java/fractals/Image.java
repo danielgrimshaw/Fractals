@@ -28,6 +28,7 @@ import javax.swing.JFrame;
 import javax.swing.JComponent;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Scanner;
 
 public class Image extends JComponent {
 	int LINEWIDTH, OPERATOR, XCENTER, YCENTER, ANGLE;
@@ -39,7 +40,13 @@ public class Image extends JComponent {
 	long i;
 	float [] a, b, c, d, e, f, x, y, newx;
 	
+   private void wait() {
+      Scanner s = new Scanner(System.in);
+      s.next();
+   }
+      
 	synchronized private void paint(Graphics g) {
+      
 	}
 		
 	synchronized private void image_draw(int color, int iterations) {

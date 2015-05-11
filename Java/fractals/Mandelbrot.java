@@ -68,11 +68,11 @@ public class Mandelbrot extends JComponent implements Fractal{
 				c = new Complex(p, q);
 				
 				Complex z = new Complex(0.0, 0.0);
-				double smoothcolor = Math.exp(-z.abs());
+				double smoothcolor;
 				
 				for (int i = 0; i < MAX_ITERATIONS && z.abs() < 30; i++) {
 					z = f(z);
-					smoothcolor += Math.exp(-z.abs());
+               smoothcolor = i + 1 - Math.log(Math.log(z.abs()))/Math.log(2);
 				}
 				
 				smoothcolor = smoothcolor/MAX_ITERATIONS;
@@ -112,6 +112,6 @@ public class Mandelbrot extends JComponent implements Fractal{
 		frame.setSize(frameWidth, frameHeight/*/frame.getWidth(), frame.getHeight()*/);
 		//frame.pack();
 		frame.setVisible(true);
-		frame.getContentPane().add(new Mandelbrot(frame.getContentPane().getHeight(), frame.getContentPane().getWidth(), ColorSet.blueToPink, true));
+		frame.getContentPane().add(new Mandelbrot(frame.getContentPane().getHeight(), frame.getContentPane().getWidth(), ColorSet.pinkToGreen, true));
 	}
 }
