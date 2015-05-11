@@ -30,6 +30,7 @@ import javax.swing.JFrame;
 import javax.swing.JComponent;
 import fractals.Fractal;
 import fractals.ColorSet;
+import fractals.Common;
 
 public class Mandelbrot extends JComponent implements Fractal{
 	private static final int MAX_ITERATIONS = 1000;
@@ -68,15 +69,15 @@ public class Mandelbrot extends JComponent implements Fractal{
 				c = new Complex(p, q);
 				
 				Complex z = new Complex(0.0, 0.0);
-				double smoothcolor;
+				double smoothcolor = 0;
 				
 				for (int i = 0; i < MAX_ITERATIONS && z.abs() < 30; i++) {
 					z = f(z);
-               smoothcolor = i + 1 - Math.log(Math.log(z.abs()))/Math.log(2);
+                    smoothcolor = i + 1 - Math.log(Math.log(z.abs()))/Math.log(2);
 				}
 				
 				smoothcolor = smoothcolor/MAX_ITERATIONS;
-				putPixel(g, col, row, 
+				Common.putPixel(g, col, row, 
 						Color.HSBtoRGB(color.getHue() + (float)(color.getFactor()*smoothcolor),
 										color.getSaturation(), 
 										color.getBrightness()));
@@ -86,20 +87,6 @@ public class Mandelbrot extends JComponent implements Fractal{
 	
 	public Complex f(Complex z) {
 		return z.times(z).plus(c);
-	}
-	
-	private double linearInterpolate(double v0, double v1, double t) {
-		// This is precise
-		return (1-t)*v0 + t*v1;
-	}
-	
-	public void putPixel(Graphics g, int col, int row, int color) {
-		if (col > maxcol)
-			throw new IllegalArgumentException("Column value is too large");
-		if (row > maxrow)
-			throw new IllegalArgumentException("Row value is too large");
-		g.setColor(new Color(color));
-		g.drawLine(col,row,col,row);
 	}
 		
 	public static void main (String [] args) {

@@ -28,7 +28,7 @@ import javax.swing.JFrame;
 import javax.swing.JComponent;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Scanner;
+import fractals.Common;
 
 public class Image extends JComponent {
 	int LINEWIDTH, OPERATOR, XCENTER, YCENTER, ANGLE;
@@ -38,32 +38,30 @@ public class Image extends JComponent {
 	int j, k, xscale, yscale, xoffset, yoffset, pr;
 	int [] p, pk;
 	long i;
-	float [] a, b, c, d, e, f, x, y, newx;
+	float [] a, b, c, d, e, f;
+	float x, y, newx;
 	
-   private void wait() {
-      Scanner s = new Scanner(System.in);
-      s.next();
-   }
+	int cols, rows;
       
-	synchronized private void paint(Graphics g) {
-      
-	}
+	synchronized public void paint(Graphics g) {
+        
+    }
 		
-	synchronized private void image_draw(int color, int iterations) {
+	synchronized private void image_draw(Graphics g, int color, int iterations) {
 		int px, py;
 		
 		x = 0;
 		y = 0;
 		for (i = 1; i <= iterations; i++) {
 			j = (int)(Math.random() * 32768);
-			k = (j < p[0]) ? 0 :((j < p[1]) ? 1 : ((j < p[2]) ? 2 : 3));
-			newx = (a[k]*x + b[k]*y + e[k]);
+			k = (j < p[0]) ? 0 : ((j < p[1]) ? 1 : ((j < p[2]) ? 2 : 3));
+			newx = (a[k] * x + b[k] * y + e[k]);
 			y = (c[k]*x + d[k]*y + f[k]);
 			x = newx;
-			px = x*xscale + xoffset;
-			py = (480 - y*yscale + yoffset);
+			px = (int)(x*xscale + xoffset);
+			py = (int)(480 - y*yscale + yoffset);
 			if ((px >= 0) && (px < 640) && (py >= 0) && (py < 480))
-				putpixel(px, py, color);
+				Common.putPixel(g, px, py, color);
 		}
 	}
 }
