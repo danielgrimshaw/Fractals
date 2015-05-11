@@ -59,7 +59,7 @@ public class Julia extends JComponent {
 		
 		int row, col; //col is column, not color
 		
-		double pMax = 1.0, pMin = -2.5, qMax = 1.0, qMin = -1.0;
+		double pMax = 3.0, pMin = -3.0, qMax = 3.0, qMin = -3.0;
 		double deltaP = (pMax - pMin)/maxcol;
 		double deltaQ = (qMax - qMin)/maxrow;
 		
@@ -75,7 +75,7 @@ public class Julia extends JComponent {
 					smoothcolor += Math.exp(z.times(-1.0).abs());
 				}
 				
-				smoothcolor /= MAX_ITERATIONS;
+				smoothcolor = smoothcolor/MAX_ITERATIONS;
 				putPixel(g, col, row, Color.HSBtoRGB((float)(smoothcolor), 0.6F, 1.0F));
 			}
 		}
