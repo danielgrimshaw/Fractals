@@ -53,7 +53,7 @@ public class Julia extends JComponent {
 		this.c = new Complex(ca, cb);
 	}
 	
-	public void paint(Graphics g) {
+	synchronized public void paint(Graphics g) {
 		if (debug)
 			System.out.println("Painting...");
 		
@@ -76,7 +76,7 @@ public class Julia extends JComponent {
 				}
 				
 				smoothcolor /= MAX_ITERATIONS;
-				putPixel(g, col, row, Color.HSBtoRGB(0.95F + (float)(10*smoothcolor), 0.6F, 1.0F));
+				putPixel(g, col, row, Color.HSBtoRGB((float)(smoothcolor), 0.6F, 1.0F));
 			}
 		}
 	}
@@ -102,7 +102,8 @@ public class Julia extends JComponent {
 		JFrame frame = new JFrame("Mandelbrot Set On The Imaginary Plane");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-		frame.setSize(frameWidth, frameHeight/*frame.getWidth(), frame.getHeight()*/);
+		frame.setSize(frameWidth, frameHeight/*/frame.getWidth(), frame.getHeight()*/);
+      //frame.pack();
 		frame.setVisible(true);
 		frame.add(new Julia(frame.getContentPane().getHeight(), frame.getContentPane().getWidth(), true));
 	}
