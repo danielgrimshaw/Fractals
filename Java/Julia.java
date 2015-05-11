@@ -35,11 +35,11 @@ public class Julia extends JComponent {
 	private Complex c;
 	
 	public Julia(int rows, int cols) {
-		this(rows, cols, 0.25, 0.25, false);
+		this(rows, cols, -0.4, 0.6, false);
 	}
 	
 	public Julia(int rows, int cols, boolean debug) {
-		this(rows, cols, 0.4, 0.6, debug);
+		this(rows, cols, -0.4, 0.6, debug);
 	}
 	
 	public Julia(int rows, int cols, double ca, double cb) {
@@ -59,7 +59,7 @@ public class Julia extends JComponent {
 		
 		int row, col; //col is column, not color
 		
-		double pMax = 3.0, pMin = -3.0, qMax = 3.0, qMin = -3.0;
+		double pMax = 1.5, pMin = -1.5, qMax = 1.5, qMin = -1.5;
 		double deltaP = (pMax - pMin)/maxcol;
 		double deltaQ = (qMax - qMin)/maxrow;
 		
@@ -68,15 +68,15 @@ public class Julia extends JComponent {
 				double p = pMin + col*deltaP; // Scaled x-coordinate of the point
 				double q = qMin + row*deltaQ; // Scaled y-coordinate of the point
 				Complex z = new Complex(p, q);
-				double smoothcolor = Math.exp(z.times(-1.0).abs());
+				double smoothcolor = Math.exp(-z.abs());
 				
 				for (int i = 0; i < MAX_ITERATIONS && z.abs() < 30; i++) {
 					z = f(z);
-					smoothcolor += Math.exp(z.times(-1.0).abs());
+					smoothcolor += Math.exp(-z.abs());
 				}
 				
 				smoothcolor = smoothcolor/MAX_ITERATIONS;
-				putPixel(g, col, row, Color.HSBtoRGB((float)(smoothcolor), 0.6F, 1.0F));
+				putPixel(g, col, row, Color.HSBtoRGB((float)(10*smoothcolor)+0.95F, 0.6F, 1.0F));
 			}
 		}
 	}
