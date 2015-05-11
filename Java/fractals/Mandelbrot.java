@@ -72,7 +72,8 @@ public class Mandelbrot extends JComponent implements Fractal{
 				
 				for (int i = 0; i < MAX_ITERATIONS && z.abs() < 30; i++) {
 					z = f(z);
-					smoothcolor += Math.exp(-z.abs());
+					smoothcolor = i + 1 - Math.log(Math.log(z.abs()))/Math.log(2);
+					//smoothcolor += Math.exp(-z.abs());
 				}
 				
 				smoothcolor = smoothcolor/MAX_ITERATIONS;
