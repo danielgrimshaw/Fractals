@@ -20,37 +20,43 @@
  * 
  * 
  */
+package fractals;
 
 import javax.swing.JFrame;
 import javax.swing.JComponent;
 import java.awt.Color;
 import java.awt.Graphics;
+import fractals.Fractal;
+import fractals.ColorSet;
+import fractals.Complex;
 
-public class Julia extends JComponent {
+public class Julia extends JComponent implements Fractal {
 	private static final int MAX_ITERATIONS = 1000;
 	
 	private final boolean debug;
 	private final int maxrow, maxcol;
 	
 	private Complex c;
+	private ColorSet color;
 	
 	public Julia(int rows, int cols) {
-		this(rows, cols, -0.4, 0.6, false);
+		this(rows, cols, -0.4, 0.6, ColorSet.pinkToGreen, false);
 	}
 	
 	public Julia(int rows, int cols, boolean debug) {
-		this(rows, cols, -0.4, 0.6, debug);
+		this(rows, cols, -0.4, 0.6, ColorSet.pinkToGreen, debug);
 	}
 	
 	public Julia(int rows, int cols, double ca, double cb) {
-		this(rows, cols, ca, cb, false);
+		this(rows, cols, ca, cb, ColorSet.pinkToGreen, false);
 	}
 	
-	public Julia(int rows, int cols, double ca, double cb, boolean debug) {
+	public Julia(int rows, int cols, double ca, double cb, ColorSet colors, boolean debug) {
 		this.debug = debug;
 		this.maxrow = rows;
 		this.maxcol = cols;
 		this.c = new Complex(ca, cb);
+		this.color = colors;
 	}
 	
 	synchronized public void paint(Graphics g) {
@@ -76,12 +82,15 @@ public class Julia extends JComponent {
 				}
 				
 				smoothcolor = smoothcolor/MAX_ITERATIONS;
-				putPixel(g, col, row, Color.HSBtoRGB((float)(10*smoothcolor)+0.95F, 0.6F, 1.0F));
+				putPixel(g, col, row, 
+						Color.HSBtoRGB(color.getHue() + (float)(color.getFactor()*smoothcolor),
+										color.getSaturation(), 
+										color.getBrightness()));
 			}
 		}
 	}
 	
-	private Complex f(Complex z) {
+	public Complex f(Complex z) {
 		// f(z) = z^2 + C
 		return z.times(z).plus(c);
 	}
@@ -99,13 +108,13 @@ public class Julia extends JComponent {
 		int frameWidth = 640;
 		int frameHeight = 480;
 		
-		JFrame frame = new JFrame("Mandelbrot Set On The Imaginary Plane");
+		JFrame frame = new JFrame("Julia Set");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		frame.setSize(frameWidth, frameHeight/*/frame.getWidth(), frame.getHeight()*/);
-      //frame.pack();
+		//frame.pack();
 		frame.setVisible(true);
-		frame.add(new Julia(frame.getContentPane().getHeight(), frame.getContentPane().getWidth(), true));
+		frame.add(new Julia(frame.getContentPane().getHeight(), frame.getContentPane().getWidth(), -0.4, 0.6, ColorSet.pinkToGreen, true));
 	}
 }
 

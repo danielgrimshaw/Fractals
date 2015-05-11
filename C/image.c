@@ -1,4 +1,4 @@
-//image.c -- penerates images through usage of fractals and iterated function systems
+//image.c -- generates images through usage of fractals and iterated function systems
 #include <stdio.h>
 #include <math.h>
 #include <graphics.h>

@@ -43,6 +43,8 @@
  *	
  */
 
+package fractals;
+
 public class Complex {
     private final double re;   // the real part
     private final double im;   // the imaginary part
