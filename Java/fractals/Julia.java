@@ -105,8 +105,8 @@ public class Julia extends JComponent implements Fractal {
 	}
 	
 	public static void main (String args[]) {
-		int frameWidth = 640;
-		int frameHeight = 480;
+		int frameWidth = 1920;
+		int frameHeight = 1080;
 		
 		JFrame frame = new JFrame("Julia Set");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
