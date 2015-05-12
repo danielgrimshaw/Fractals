@@ -104,7 +104,7 @@ public class Julia extends JComponent implements Fractal {
 		g.drawLine(col,row,col,row);
 	}
 	
-	public static void main (String args[]) {
+	public static void main(String args[]) {
 		int frameWidth = 1920;
 		int frameHeight = 1080;
 		

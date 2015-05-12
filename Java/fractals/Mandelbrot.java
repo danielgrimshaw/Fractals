@@ -89,7 +89,7 @@ public class Mandelbrot extends JComponent implements Fractal{
 		return z.times(z).plus(c);
 	}
 		
-	public static void main (String [] args) {
+	public static void main(String [] args) {
 		int frameWidth = 640;
 		int frameHeight = 480;
 		

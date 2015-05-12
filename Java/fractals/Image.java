@@ -31,19 +31,28 @@ import java.awt.Graphics;
 import fractals.Common;
 
 public class Image extends JComponent {
-	int LINEWIDTH, OPERATOR, XCENTER, YCENTER, ANGLE;
-	long PATTERN;
+	private static int LINEWIDTH, OPERATOR, XCENTER, YCENTER, ANGLE;
+	private static long PATTERN;
 
-	int adaptor, mode;
-	int j, k, xscale, yscale, xoffset, yoffset, pr;
-	int [] p, pk;
-	long i;
-	double [] a, b, c, d, e, f;
-	double x, y, newx;
+	private int adaptor, mode;
+	private int j, k, xscale, yscale, xoffset, yoffset, pr;
+	private int [] p, pk;
+	private long i;
+	private double [] a, b, c, d, e, f;
+	private double x, y, newx;
 	
-	int cols, rows;
-      
+	private int cols, rows;
+	
+	private boolean debug;
+    
+    public Image(int rows, int cols, boolean debug) {
+        this.rows = rows;
+        this.cols = cols;
+        this.debug = debug;
+    }
 	synchronized public void paint(Graphics g) {
+	    if (debug)
+	        System.out.println("Displaying 1");
         a[0] = 0; a[1] = .20; a[2] = -.15; a[3] = .85;
         b[0] = 0; b[1] = -.26; b[2] = .28; b[3] = .04;
         c[0] = 0; c[1] = .23; c[2] = .26; c[3] = -.04;
@@ -76,6 +85,19 @@ public class Image extends JComponent {
 			if ((px >= 0) && (px < 640) && (py >= 0) && (py < 480))
 				Common.putPixel(g, px, py, color);
 		}
+	}
+	
+	public static void main(String [] args) {
+		int frameWidth = 640;
+		int frameHeight = 480;
+		
+		JFrame frame = new JFrame("Fractal Imagery");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+		frame.setSize(frameWidth, frameHeight/*/frame.getWidth(), frame.getHeight()*/);
+		//frame.pack();
+		frame.setVisible(true);
+		frame.getContentPane().add(new Image(frame.getContentPane().getHeight(), frame.getContentPane().getWidth(), true));
 	}
 }
 
