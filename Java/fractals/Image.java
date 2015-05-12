@@ -38,13 +38,26 @@ public class Image extends JComponent {
 	int j, k, xscale, yscale, xoffset, yoffset, pr;
 	int [] p, pk;
 	long i;
-	float [] a, b, c, d, e, f;
-	float x, y, newx;
+	double [] a, b, c, d, e, f;
+	double x, y, newx;
 	
 	int cols, rows;
       
 	synchronized public void paint(Graphics g) {
-        
+        a[0] = 0; a[1] = .20; a[2] = -.15; a[3] = .85;
+        b[0] = 0; b[1] = -.26; b[2] = .28; b[3] = .04;
+        c[0] = 0; c[1] = .23; c[2] = .26; c[3] = -.04;
+        d[0] = .16; d[1] = .22; d[2] = .24; d[3] = .85;
+        e[0] = 0; e[1] = 0; e[2] = 0; e[3] = 0;
+        f[0] = 0; f[1] = 1.60; f[2] = .44; f[3] = 1.6;
+        p[0] = 328; p[1] = 2621; p[2] = 4915; p[3] = 32767;
+        xscale = 25;
+        yscale = 25;
+        xoffset = 300;
+        yoffset = -50;
+        Common.setBackground(g, cols, rows, Color.BLUE);
+        image_draw(g, 10, 20000);
+        Common.pause();
     }
 		
 	synchronized private void image_draw(Graphics g, int color, int iterations) {

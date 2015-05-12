@@ -42,12 +42,12 @@
 		g.drawLine(col,row,col,row);
 	}
 	
-	public void pause() {
+	public static void pause() {
         Scanner s = new Scanner(System.in);
         s.next();
     }
     
-    public void setBackground(Graphics g, int col, int row, Color bk) {
+    public static void setBackground(Graphics g, int col, int row, Color bk) {
         g.setColor(bk);
         g.fillRect(0,0,col,row);
     }
